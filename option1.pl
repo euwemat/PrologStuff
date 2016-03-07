@@ -179,9 +179,77 @@ courseNumProf(661,'Dr. J. Leidig').
 courseNumProf(671,'Dr. J. Leidig').
 courseNumProf(691,'Dr. J. Leidig').
 
-whatDoTheyTeach(A):- courseNumProf(X,A), bagof(Y,courseNumName(X,Y), Query1),
+courseNumStud(467,'Jim').
+courseNumStud(452,'Jim').
+courseNumStud(457,'Jim').
+courseNumStud(437,'Pam').
+courseNumStud(457,'Pam').
+courseNumStud(452,'Pam').
+courseNumStud(467,'Kara Thrace').
+courseNumStud(452,'Kara Thrace').
+courseNumStud(365,'Kara Thrace').
+courseNumStud(463,'Gaius Baltar').
+courseNumStud(460,'Gaius Baltar').
+courseNumStud(375,'Gaius Baltar').
+
+courseNumType(330,'IS').
+courseNumType(333,'IS').
+courseNumType(337,'IS').
+courseNumType(339,'IS').
+courseNumType(343,'CS').
+courseNumType(350,'CS').
+courseNumType(353,'CS').
+courseNumType(358,'CS').
+courseNumType(361,'CS').
+courseNumType(365,'CS').
+courseNumType(371,'CS').
+courseNumType(375,'IS').
+courseNumType(437,'CS').
+courseNumType(443,'IS').
+courseNumType(450,'IS').
+courseNumType(451,'CS').
+courseNumType(452,'CS').
+courseNumType(457,'CS').
+courseNumType(460,'IS').
+courseNumType(463,'IS').
+courseNumType(467,'CS').
+courseNumType(661,'CIS').
+courseNumType(671,'CIS').
+courseNumType(691,'CIS').
+
+testListing(P, L):- testListing(P, [], L).
+
+testListing(P, Acc, L):-
+	courseNumName(Parent, P),
+	\+ member(Parent, Acc), !,
+	testListing(P, [Parent|Acc], L).
+testListing(_,L,L).
+
+/*write('What does Dr. J. Leidig teach?'), nl, whatDoTheyTeach('Dr. J. Leidig')*/
+whatDoTheyTeach(A):- courseNumProf(X,A), findall(Y,courseNumName(X,Y), Query1),
 write(Query1), nl.
 
-print_solution :- write('What does Dr. J. Leidig teach?'), nl, whatDoTheyTeach('Dr. J. Leidig').
+/*write('Does Dr. J. Leidig teach Database?'), nl, doesAteachB('Dr. J. Leidig','Database').*/
+doesAteachB(A,B):- courseNumProf(X,A),courseNumName(X,B).
+
+/*What is Dr. J. Leidig's schedule?*/
+/*Who is scheduled to teach what subject on TTH, 10am?*/
+/*When do Dr. J. Leidig and Dr. El-Said teach at the same time?*/
+/*Who teaches at the same time as Dr. J. Leidig?*/
+
+/*What courses do Jim and Pam have in common?*/
+coursesInCommon(A,B):- courseNumStud(X,A),courseNumStud(X,B), findall(Y,courseNumName(X,Y), Query1),
+write(Query1), nl.
+
+/*Who is taking CS courses?*/
+/*What types of courses are Gaius Baltar taking?*/
+whatTypesOfClassesDoTheyHave(A):- courseNumStud(X,A),courseNumType(X,Y),
+write(Y).
+
+/*Are there any scheduling conflicts of professors or locations?*/
+
+
+
+
 
 
