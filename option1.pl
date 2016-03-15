@@ -217,14 +217,6 @@ courseNumType(661,'CIS').
 courseNumType(671,'CIS').
 courseNumType(691,'CIS').
 
-testListing(P, L):- testListing(P, [], L).
-
-testListing(P, Acc, L):-
-	courseNumName(Parent, P),
-	\+ member(Parent, Acc), !,
-	testListing(P, [Parent|Acc], L).
-testListing(_,L,L).
-
 /*write('What does Dr. J. Leidig teach?'), nl, whatDoTheyTeach('Dr. J. Leidig')*/
 whatDoTheyTeach(A):- courseNumProf(X,A), findall(Y,courseNumName(X,Y), Query1),
 write(Query1), nl.
@@ -234,6 +226,8 @@ doesAteachB(A,B):- courseNumProf(X,A),courseNumName(X,B).
 
 /*What is Dr. J. Leidig's schedule?*/
 /*Who is scheduled to teach what subject on TTH, 10am?*/
+
+
 /*When do Dr. J. Leidig and Dr. El-Said teach at the same time?*/
 /*Who teaches at the same time as Dr. J. Leidig?*/
 
@@ -243,12 +237,14 @@ write(Query1), nl.
 
 /*Who is taking CS courses?*/
 /*What types of courses are Gaius Baltar taking?*/
-whatTypesOfClassesDoTheyHave(A):- courseNumStud(X,A),courseNumType(X,Y),
-write(Y).
+whatTypesOfClassesDoTheyHave(B,C):-courseNumType(B,C).
+whatTypesOfClassesDoTheyHave(A):- courseNumStud(X,A),whatTypesOfClassesDoTheyHave(X,Y).
 
 /*Are there any scheduling conflicts of professors or locations?*/
 
-
+prints:-
+bagof(X, whatTypesOfClassesDoTheyHave('Gaius Baltar', X), Z),
+write(Z).
 
 
 
