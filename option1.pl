@@ -261,7 +261,7 @@ whoWhatFromDayWhen(A,B):- findall((Y,Z),(courseNumDays(X,A),courseNumTime(X,B),c
 
 
 /*When do Dr. J. Leidig and Dr. El-Said teach at the same time?*/
-sameTimeTeach(A,B) :- findall(W,(courseNumProf(X,A),courseNumProf(Z,B),courseNumTime(X,W),courseNumTime(Z,W)),Query1),write(Query1),nl.
+sameTimeTeach(A,B) :- setof(W,(courseNumProf(X,A),courseNumProf(Z,B),courseNumTime(X,W),courseNumTime(Z,W)),Query1),write(Query1),nl.
 
 
 /*Who teaches at the same time as Dr. J. Leidig?*/
@@ -273,12 +273,18 @@ coursesInCommon(A,B):- findall(Y,(courseNumStud(X,A),courseNumStud(X,B),courseNu
 write(Query1), nl.
 
 /*Who is taking CS courses?*/
+whoIsIn(A):- setof(Z,X^(courseNumType(X,A),courseNumStud(X,Z)),Query1),write(Query1), nl. 
+
 /*What types of courses are Gaius Baltar taking?*/
 
-whatTypesOfClassesDoTheyHave(A):- setof(Y,(courseNumStud(X,A),courseNumType(X,Y)),Query1),
+whatTypesOfClassesDoTheyHave(A):- setof(Y,X^(courseNumStud(X,A),courseNumType(X,Y)),Query1),
 write(Query1), nl.
 
 /*Are there any scheduling conflicts of professors or locations?*/
+
+
+
+
 
 prints:-
 bagof(X, whatTypesOfClassesDoTheyHave('Gaius Baltar', X), Z),
