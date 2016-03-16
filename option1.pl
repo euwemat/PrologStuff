@@ -218,11 +218,12 @@ courseNumType(671,'CIS').
 courseNumType(691,'CIS').
 
 /*write('What does Dr. J. Leidig teach?'), nl, whatDoTheyTeach('Dr. J. Leidig')*/
-whatDoTheyTeach(A):- courseNumProf(X,A), findall(Y,courseNumName(X,Y), Query1),
+whatDoTheyTeach(A):-  findall(Y,(courseNumProf(X,A),courseNumName(X,Y)), Query1),
 write(Query1), nl.
 
 /*write('Does Dr. J. Leidig teach Database?'), nl, doesAteachB('Dr. J. Leidig','Database').*/
-doesAteachB(A,B):- courseNumProf(X,A),courseNumName(X,B).
+doesAteachB(A,B):- courseNumProf(X,A),findall(X,courseNumName(X,B),Query1),
+write(Query1),nl.
 
 /*What is Dr. J. Leidig's schedule?*/
 /*Who is scheduled to teach what subject on TTH, 10am?*/
