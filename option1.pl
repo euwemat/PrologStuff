@@ -242,8 +242,9 @@ write(Query1), nl.
 
 /*Who is taking CS courses?*/
 /*What types of courses are Gaius Baltar taking?*/
-whatTypesOfClassesDoTheyHave(B,C):-courseNumType(B,C).
-whatTypesOfClassesDoTheyHave(A):- courseNumStud(X,A),whatTypesOfClassesDoTheyHave(X,Y).
+
+whatTypesOfClassesDoTheyHave(A):- setof(Y,(courseNumStud(X,A),courseNumType(X,Y)),Query1),
+write(Query1), nl.
 
 /*Are there any scheduling conflicts of professors or locations?*/
 
