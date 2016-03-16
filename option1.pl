@@ -48,18 +48,18 @@ className('System Programming').
 className('Web Application Programming').
 className('Wireless Netorking Systems').
 
-classTime('9:00 am','9:50 am').
-classTime('10:00 am','10:50 am').
-classTime('10:00 am','11:15 am').
-classTime('11:00 am','11:50 am').
-classTime('12:00 pm','12:50 pm').
-classTime('1:00 pm','1:50 pm').
-classTime('1:00 pm','2:15 pm').
-classTime('2:00 pm','2:50 pm').
-classTime('3:00 pm','3:50 pm').
-classTime('4:00 pm','5:15 pm').
-classTime('6:00 pm','7:50 pm').
-classTime('6:00 pm','8:50 pm').
+classTime('9:00 am 9:50 am').
+classTime('10:00 am 10:50 am').
+classTime('10:00 am 11:15 am').
+classTime('11:00 am 11:50 am').
+classTime('12:00 pm 12:50 pm').
+classTime('1:00 pm 1:50 pm').
+classTime('1:00 pm 2:15 pm').
+classTime('2:00 pm 2:50 pm').
+classTime('3:00 pm 3:50 pm').
+classTime('4:00 pm 5:15 pm').
+classTime('6:00 pm 7:50 pm').
+classTime('6:00 pm 8:50 pm').
 
 classDates('M').
 classDates('MW').
@@ -129,30 +129,30 @@ courseNumName(661,'Medical and BioInformatics').
 courseNumName(671,'Information Visualization').
 courseNumName(691,'MBI Capstone').
 
-courseNumTime(330,'9:00 am','9:50 am').
-courseNumTime(467,'10:00 am','10:50 am').
-courseNumTime(451,'10:00 am','10:50 am').
-courseNumTime(437,'10:00 am','10:50 am').
-courseNumTime(350,'10:00 am','10:50 am').
-courseNumTime(460,'10:00 am','11:15 am').
-courseNumTime(365,'10:00 am','11:15 am').
-courseNumTime(443,'11:00 am','11:50 am').
-courseNumTime(450,'12:00 pm','12:50 pm').
-courseNumTime(353,'12:00 pm','12:50 pm').
-courseNumTime(452,'1:00 pm','1:50 pm').
-courseNumTime(343,'1:00 pm','1:50 pm').
-courseNumTime(339,'1:00 pm','2:15 pm').
-courseNumTime(463,'2:00 pm','2:50 pm').
-courseNumTime(457,'2:00 pm','2:50 pm').
-courseNumTime(358,'3:00 pm','3:50 pm').
-courseNumTime(337,'3:00 pm','3:50 pm').
-courseNumTime(361,'4:00 pm','5:15 pm').
-courseNumTime(371,'4:00 pm','5:15 pm').
-courseNumTime(375,'6:00 pm','7:50 pm').
-courseNumTime(333,'6:00 pm','8:50 pm').
-courseNumTime(661,'6:00 pm','8:50 pm').
-courseNumTime(671,'6:00 pm','8:50 pm').
-courseNumTime(691,'6:00 pm','8:50 pm').
+courseNumTime(330,'9:00 am 9:50 am').
+courseNumTime(467,'10:00 am 10:50 am').
+courseNumTime(451,'10:00 am 10:50 am').
+courseNumTime(437,'10:00 am 10:50 am').
+courseNumTime(350,'10:00 am 10:50 am').
+courseNumTime(460,'10:00 am 11:15 am').
+courseNumTime(365,'10:00 am 11:15 am').
+courseNumTime(443,'11:00 am 11:50 am').
+courseNumTime(450,'12:00 pm 12:50 pm').
+courseNumTime(353,'12:00 pm 12:50 pm').
+courseNumTime(452,'1:00 pm 1:50 pm').
+courseNumTime(343,'1:00 pm 1:50 pm').
+courseNumTime(339,'1:00 pm 2:15 pm').
+courseNumTime(463,'2:00 pm 2:50 pm').
+courseNumTime(457,'2:00 pm 2:50 pm').
+courseNumTime(358,'3:00 pm 3:50 pm').
+courseNumTime(337,'3:00 pm 3:50 pm').
+courseNumTime(361,'4:00 pm 5:15 pm').
+courseNumTime(371,'4:00 pm 5:15 pm').
+courseNumTime(375,'6:00 pm 7:50 pm').
+courseNumTime(333,'6:00 pm 8:50 pm').
+courseNumTime(661,'6:00 pm 8:50 pm').
+courseNumTime(671,'6:00 pm 8:50 pm').
+courseNumTime(691,'6:00 pm 8:50 pm').
 
 courseNumProf(330,'Dr. Du').
 courseNumProf(333,'Ms. Posada').
@@ -232,6 +232,7 @@ doesAteachB(A,B):- courseNumProf(X,A),courseNumName(X,B).
 
 
 /*When do Dr. J. Leidig and Dr. El-Said teach at the same time?*/
+sameTimeTeach(A,B) :- findall(Y,(
 
 
 /*Who teaches at the same time as Dr. J. Leidig?*/
