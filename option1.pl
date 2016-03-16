@@ -257,10 +257,11 @@ doesAteachB(A,B):- courseNumName(X,B),!,courseNumProf(X,A).
 
 
 /*When do Dr. J. Leidig and Dr. El-Said teach at the same time?*/
-sameTimeTeach(A,B) :- findall(Y,(
 
 
 /*Who teaches at the same time as Dr. J. Leidig?*/
+teachesSameTime(A):- findall(D,(courseNumProf(X,A),courseNumDays(X,B),courseNumTime(X,C),courseNumDays(Y,B),courseNumTime(Y,C),courseNumProf(Y,D)),Query1),
+write(Query1), nl.
 
 /*What courses do Jim and Pam have in common?*/
 coursesInCommon(A,B):- findall(Y,(courseNumStud(X,A),courseNumStud(X,B),courseNumName(X,Y)), Query1),
