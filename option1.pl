@@ -292,7 +292,7 @@ teachesSameTime(A,B) :- tst(A,B);not(tst(A,B)),write('They do not teach at the s
 
 
 /*Who teaches at the same time as Dr. J. Leidig?*/
-whoTeachesSameTime(A):- setof(D,X^Y^(courseNumProf(X,A),courseNumDays(X,B),courseNumTime(X,C),courseNumDays(Y,B),courseNumTime(Y,C),courseNumProf(Y,D)),Query1),
+whoTeachesSameTime(A):- setof(D,X^Y^(courseNumProf(X,A),courseNumDays(X,B),courseNumTime(X,C),courseNumDays(Y,B),courseNumTime(Y,C),courseNumProf(Y,D),D\=A),Query1),
 write(Query1), nl.
 
 
@@ -335,4 +335,4 @@ write("Who teaches at the same time as Dr. J. Leidig?"),nl, whoTeachesSameTime('
 write("What courses do Jim and Pam have in common?"),nl, coursesInCommon('Jim', 'Pam'),nl,nl,
 write("Who is taking CS courses?"),nl,whoIsIn('CS'),nl,nl,
 write("What types of courses are Giaus Baltar taking?"),nl, whatTypesOfClassesDoTheyHave('Gaius Baltar'),nl,nl,
-write('Are there any scheduling conflicts of professors or locations?'),nl,nl,nl.
+write('Are there any scheduling conflicts of professors or locations?'),nl,scheduleConflicts,nl,nl.
