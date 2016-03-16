@@ -70,13 +70,13 @@ classDates('TR').
 classDates('W').
 
 
-classroom('EC','612').
-classroom('MAK','A1105').
-classroom('MAK','B1116').
-classroom('MAK','B1118').
-classroom('MAK','B1124').
-classroom('MAK','D1117').
-classroom('MAK''D2123').
+classroom('EC 612').
+classroom('MAK A1105').
+classroom('MAK B1116').
+classroom('MAK B1118').
+classroom('MAK B1124').
+classroom('MAK D1117').
+classroom('MAK D2123').
 
 professor('Dr. Du').
 professor('Dr. Engelsma').
@@ -217,6 +217,31 @@ courseNumType(661,'CIS').
 courseNumType(671,'CIS').
 courseNumType(691,'CIS').
 
+courseNumRoom(330,'IS').
+courseNumRoom(333,'IS').
+courseNumRoom(337,'IS').
+courseNumRoom(339,'IS').
+courseNumRoom(343,'CS').
+courseNumRoom(350,'CS').
+courseNumRoom(353,'CS').
+courseNumRoom(358,'CS').
+courseNumRoom(361,'CS').
+courseNumRoom(365,'CS').
+courseNumRoom(371,'CS').
+courseNumRoom(375,'IS').
+courseNumRoom(437,'CS').
+courseNumRoom(443,'IS').
+courseNumRoom(450,'IS').
+courseNumRoom(451,'CS').
+courseNumRoom(452,'CS').
+courseNumRoom(457,'CS').
+courseNumRoom(460,'IS').
+courseNumRoom(463,'IS').
+courseNumRoom(467,'CS').
+courseNumRoom(661,'CIS').
+courseNumRoom(671,'CIS').
+courseNumRoom(691,'CIS').
+
 courseNumDays(330,'MWF').
 courseNumDays(333,'W').
 courseNumDays(337,'TR').
@@ -261,7 +286,9 @@ whoWhatFromDayWhen(A,B):- findall((Y,Z),(courseNumDays(X,A),courseNumTime(X,B),c
 
 
 /*When do Dr. J. Leidig and Dr. El-Said teach at the same time?*/
-teachesSameTime(A,B) :- setof(W,X^Z^(courseNumProf(X,A),courseNumProf(Z,B),courseNumTime(X,W),courseNumTime(Z,W)),Query1),write(Query1),nl.
+teachesSameTime(A,B) :- setof((W,U),X^Z^(courseNumProf(X,A),courseNumProf(Z,B),courseNumTime(X,W),courseNumTime(Z,W),
+courseNumDays(X,U),courseNumDays(Z,U)),Query1)
+,write(Query1),nl.
 
 
 /*Who teaches at the same time as Dr. J. Leidig?*/
@@ -281,6 +308,8 @@ whatTypesOfClassesDoTheyHave(A):- setof(Y,X^(courseNumStud(X,A),courseNumType(X,
 write(Query1), nl.
 
 /*Are there any scheduling conflicts of professors or locations?*/
+
+scheduleConflicts():- findall((A,B,R,T,D),X^Y^(courseNumDays(X,D),courseNumDays(Y,D),courseNumTime(X,T)courseNumTime(Y,T),courseNumProf(X,A),courseNumProf(Y,B)courseNumRoom(X,R),courseNumRoom(Y,R)),Query1),write(Query1),nl.
 
 
 
