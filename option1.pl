@@ -225,14 +225,19 @@ write(Query1), nl.
 doesAteachB(A,B):- courseNumProf(X,A),courseNumName(X,B).
 
 /*What is Dr. J. Leidig's schedule?*/
+
+
+
 /*Who is scheduled to teach what subject on TTH, 10am?*/
 
 
 /*When do Dr. J. Leidig and Dr. El-Said teach at the same time?*/
+
+
 /*Who teaches at the same time as Dr. J. Leidig?*/
 
 /*What courses do Jim and Pam have in common?*/
-coursesInCommon(A,B):- courseNumStud(X,A),courseNumStud(X,B), findall(Y,courseNumName(X,Y), Query1),
+coursesInCommon(A,B):- findall(Y,(courseNumStud(X,A),courseNumStud(X,B),courseNumName(X,Y)), Query1),
 write(Query1), nl.
 
 /*Who is taking CS courses?*/
