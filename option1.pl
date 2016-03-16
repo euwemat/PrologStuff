@@ -1,109 +1,6 @@
-classNumber(330).
-classNumber(333).
-classNumber(337).
-classNumber(339).
-classNumber(343).
-classNumber(350).
-classNumber(353).
-classNumber(358).
-classNumber(361).
-classNumber(365).
-classNumber(371).
-classNumber(375).
-classNumber(437).
-classNumber(443).
-classNumber(450).
-classNumber(451).
-classNumber(452).
-classNumber(457).
-classNumber(460).
-classNumber(463).
-classNumber(467).
-classNumber(661).
-classNumber(671).
-classNumber(691).
+/*----- Facts -----*/
 
-className('AI').
-className('Computer Architecture').
-className('CS Project').
-className('Data Communications').
-className('Database').
-className('DB Management and Implementation').
-className('Distributed Computing').
-className('Information Insurance').
-className('Information Visualization').
-className('IS Project').
-className('IS Project Management').
-className('IT Project Management').
-className('Medical and BioInformatics').
-className('MBI Capstone').
-className('MIS').
-className('Network Systems Management').
-className('OS Concepts').
-className('Software Development Tools').
-className('Software Engineering').
-className('Structure of Programming Languages').
-className('Systems Analysis and Design').
-className('System Programming').
-className('Web Application Programming').
-className('Wireless Netorking Systems').
-
-classTime('9:00 am 9:50 am').
-classTime('10:00 am 10:50 am').
-classTime('10:00 am 11:15 am').
-classTime('11:00 am 11:50 am').
-classTime('12:00 pm 12:50 pm').
-classTime('1:00 pm 1:50 pm').
-classTime('1:00 pm 2:15 pm').
-classTime('2:00 pm 2:50 pm').
-classTime('3:00 pm 3:50 pm').
-classTime('4:00 pm 5:15 pm').
-classTime('6:00 pm 7:50 pm').
-classTime('6:00 pm 8:50 pm').
-
-classDates('M').
-classDates('MW').
-classDates('MWF').
-classDates('R').
-classDates('T').
-classDates('TR').
-classDates('W').
-
-
-classroom('EC 612').
-classroom('MAK A1105').
-classroom('MAK B1116').
-classroom('MAK B1118').
-classroom('MAK B1124').
-classroom('MAK D1117').
-classroom('MAK D2123').
-
-professor('Dr. Du').
-professor('Dr. Engelsma').
-professor('Dr. Kalafut').
-professor('Dr. Kurmas').
-professor('Mr. Lange').
-professor('Dr. P. Leidig').
-professor('Dr. Wolffe').
-professor('Dr. Schymik').
-professor('Ms. Peterman').
-professor('Dr. El-Said').
-professor('Dr. Scripps').
-professor('Dr. J. Leidig').
-professor('Dr. Trefftz').
-professor('Dr. Alsabbagh').
-professor('Dr. Jorgensen').
-professor('Dr. Nandigam').
-professor('Ms. Posada').
-
-major('CS').
-major('IS').
-
-student('Jim').
-student('Pam').
-student('Kara Thrace').
-student('Gaius Baltar').
-
+/*---- Matches Course Number To Course Name ----*/
 courseNumName(330,'Systems Analysis and Design').
 courseNumName(333,'DB Management and Implementation').
 courseNumName(337,'Network Systems Management').
@@ -129,6 +26,7 @@ courseNumName(661,'Medical and BioInformatics').
 courseNumName(671,'Information Visualization').
 courseNumName(691,'MBI Capstone').
 
+/*---- Matches Course Number To Course Time ----*/
 courseNumTime(330,'9:00 am 9:50 am').
 courseNumTime(467,'10:00 am 10:50 am').
 courseNumTime(451,'10:00 am 10:50 am').
@@ -154,6 +52,7 @@ courseNumTime(661,'6:00 pm 8:50 pm').
 courseNumTime(671,'6:00 pm 8:50 pm').
 courseNumTime(691,'6:00 pm 8:50 pm').
 
+/*---- Matches Course Number To Course Professor ----*/
 courseNumProf(330,'Dr. Du').
 courseNumProf(333,'Ms. Posada').
 courseNumProf(337,'Dr. El-Said').
@@ -179,6 +78,8 @@ courseNumProf(661,'Dr. J. Leidig').
 courseNumProf(671,'Dr. J. Leidig').
 courseNumProf(691,'Dr. J. Leidig').
 
+
+/*---- Matches Course Number To Student ----*/
 courseNumStud(467,'Jim').
 courseNumStud(452,'Jim').
 courseNumStud(457,'Jim').
@@ -192,6 +93,7 @@ courseNumStud(463,'Gaius Baltar').
 courseNumStud(460,'Gaius Baltar').
 courseNumStud(375,'Gaius Baltar').
 
+/*---- Matches Course Number To Course Type ----*/
 courseNumType(330,'IS').
 courseNumType(333,'IS').
 courseNumType(337,'IS').
@@ -217,6 +119,7 @@ courseNumType(661,'CIS').
 courseNumType(671,'CIS').
 courseNumType(691,'CIS').
 
+/*---- Matches Course Number To Course Room ----*/
 courseNumRoom(330,'MAK D1117').
 courseNumRoom(333,'MAK D1117').
 courseNumRoom(337,'MAK B1124').
@@ -242,6 +145,7 @@ courseNumRoom(661,'EC 612').
 courseNumRoom(671,'EC 612').
 courseNumRoom(691,'EC 612').
 
+/*---- Matches Course Number To Days That Course Is Taught ----*/
 courseNumDays(330,'MWF').
 courseNumDays(333,'W').
 courseNumDays(337,'TR').
@@ -267,64 +171,72 @@ courseNumDays(661,'T').
 courseNumDays(671,'R').
 courseNumDays(691,'M').
 
-/*write('What does Dr. J. Leidig teach?'), nl, whatDoTheyTeach('Dr. J. Leidig')*/
-whatDoTheyTeach(A):-  findall(Y,(courseNumProf(X,A),courseNumName(X,Y)), Query1),
-write(Query1), nl.
 
-/*write('Does Dr. J. Leidig teach Database?'), nl, doesAteachB('Dr. J. Leidig','Database').*/
+/*----- Rules -----*/
+/*This will give you all the courses a professor teaches
+  Example whatDoTheyTeach('Dr. J. Leidig')*/
+whatDoTheyTeach(A):-	findall(Y,(courseNumProf(X,A),courseNumName(X,Y)), Query1),
+						write(Query1), nl.
+
+/*This will tell you if a professor teaches a specific course
+  Example doesProfTeachClass('Dr. J. Leidig', 'Database')*/
 doesAteachB(A,B):- courseNumName(X,B),!,courseNumProf(X,A).
-doesProfTeachClass(A, B):- doesAteachB(A,B),write('YES');not(doesAteachB(A,B)),write('NO').
+doesProfTeachClass(A, B):- doesAteachB(A,B),write('YES');not(doesAteachB(A,B)),write('No '),write(A),write(' does not teach '),write(B).
 
-/*What is Dr. J. Leidig's schedule?*/
-schedule(A) :- findall((X, Y, Z, W),(courseNumProf(X,A),courseNumName(X,Y),courseNumTime(X,Z),courseNumDays(X,W)),Query1),
-write(Query1), nl.
+/*This will tell you the schedule of a specific professor
+  Example schedule('Dr. J. Leidig')*/
+schedule(A):-	findall((X, Y, Z, W),(courseNumProf(X,A),courseNumName(X,Y),courseNumTime(X,Z),courseNumDays(X,W)),Query1),
+				write(Query1), nl.
 
 
-/*Who is scheduled to teach what subject on TTH, 10am?*/
+/*This will tell you who is teaching a course at a specific day of the week and time
+  Example whoWhatFromDayWhen('TR', '10:00 am 11:15 am')*/
 whoWhatFromDayWhen(A,B):- findall((Y,Z),(courseNumDays(X,A),courseNumTime(X,B),courseNumName(X,Y),courseNumProf(X,Z)),Query1), write(Query1), nl.
 
 
-/*When do Dr. J. Leidig and Dr. El-Said teach at the same time?*/
+/*This will tell you if two professors teach at the same time
+  Example teachesSameTime('Dr. J. Leidig', 'Dr. El-Said')*/
 tst(A,B) :- setof((W,U),X^Z^(courseNumProf(X,A),courseNumProf(Z,B),courseNumTime(X,W),courseNumTime(Z,W),
-courseNumDays(X,U),courseNumDays(Z,U)),Query1)
-,write(Query1),nl.
-teachesSameTime(A,B) :- tst(A,B);not(tst(A,B)),write('They do not teach at the same time.').
+			courseNumDays(X,U),courseNumDays(Z,U)),Query1),write(Query1),nl.
+teachesSameTime(A,B) :- tst(A,B),write('Yes they teach at the same time');not(tst(A,B)),write('They do not teach at the same time.').
 
 
-/*Who teaches at the same time as Dr. J. Leidig?*/
-whoTeachesSameTime(A):- setof(D,X^Y^(courseNumProf(X,A),courseNumDays(X,B),courseNumTime(X,C),courseNumDays(Y,B),courseNumTime(Y,C),courseNumProf(Y,D),D\=A),Query1),
-write(Query1), nl.
+/*This will tell you who teaches at the same time as another professor
+  Example whoTeachesSameTime('Dr. J. Leidig')*/
+whoTeachesSameTime(A):-	setof(D,X^Y^(courseNumProf(X,A),courseNumDays(X,B),courseNumTime(X,C),courseNumDays(Y,B),courseNumTime(Y,C),courseNumProf(Y,D),D\=A),Query1),
+						write(Query1), nl.
 
 
-/*What courses do Jim and Pam have in common?*/
-coursesInCommon(A,B):- findall(Y,(courseNumStud(X,A),courseNumStud(X,B),courseNumName(X,Y)), Query1),
-write(Query1), nl.
+/*This will tell you what courses two specific students have in common
+  Example coursesInCommon('Jim', 'Pam')*/
+coursesInCommon(A,B):-	findall(Y,(courseNumStud(X,A),courseNumStud(X,B),courseNumName(X,Y)), Query1),
+						write(Query1), nl.
 
 
-/*Who is taking CS courses?*/
+/*This will tell you which student is taking a particular type of course
+  Example whoIsIn('CS')*/
 whoIsIn(A):- setof(Z,X^(courseNumType(X,A),courseNumStud(X,Z)),Query1),write(Query1), nl. 
 
 
-/*What types of courses are Gaius Baltar taking?*/
-whatTypesOfClassesDoTheyHave(A):- setof(Y,X^(courseNumStud(X,A),courseNumType(X,Y)),Query1),
-write(Query1), nl.
+/*This will tell you what types of courses a specific student is taking
+  Example whatTypesOfClassesDoTheyHave('Gaius Baltar')*/
+whatTypesOfClassesDoTheyHave(A):- 	setof(Y,X^(courseNumStud(X,A),courseNumType(X,Y)),Query1),
+									write(Query1), nl.
 
 
-/*Are there any scheduling conflicts of professors or locations?*/
+/*Are there any scheduling conflicts of professors or locations?
+  This will tell you if there is any scheduling conflicts between professors*/
+scheduleConflicts:-	setof(((A,B),R,T,D),
+					X^Y^
+					(courseNumDays(X,D),courseNumDays(Y,D),
+					courseNumTime(X,T),courseNumTime(Y,T),
+					courseNumProf(X,A),courseNumProf(Y,B),
+					courseNumRoom(X,R),courseNumRoom(Y,R),
+					(A)\=(B)), Query1),
+					write(Query1),nl.
 
-scheduleConflicts :- setof(((A,B),R,T,D),
-X^Y^
-(courseNumDays(X,D),courseNumDays(Y,D),
-courseNumTime(X,T),courseNumTime(Y,T),
-courseNumProf(X,A),courseNumProf(Y,B),
-courseNumRoom(X,R),courseNumRoom(Y,R),
-(A)\=(B)),
-Query1)
-,write(Query1),nl.
-
-
-
-
+					
+/*----- Goal -----*/
 prints:-
 write('What does Dr. J. Leidig teach?'), nl, whatDoTheyTeach('Dr. J. Leidig'), nl, nl,
 write('Does Dr. J. Leidig teach Database?'), nl, doesProfTeachClass('Dr. J. Leidig', 'Database'), nl, nl,
@@ -336,3 +248,5 @@ write('What courses do Jim and Pam have in common?'),nl, coursesInCommon('Jim', 
 write('Who is taking CS courses?'),nl,whoIsIn('CS'),nl,nl,
 write('What types of courses are Giaus Baltar taking?'),nl, whatTypesOfClassesDoTheyHave('Gaius Baltar'),nl,nl,
 write('Are there any scheduling conflicts of professors or locations?'),nl,scheduleConflicts,nl,nl.
+
+?- prints.
