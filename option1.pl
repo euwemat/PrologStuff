@@ -217,30 +217,30 @@ courseNumType(661,'CIS').
 courseNumType(671,'CIS').
 courseNumType(691,'CIS').
 
-courseNumRoom(330,'IS').
-courseNumRoom(333,'IS').
-courseNumRoom(337,'IS').
-courseNumRoom(339,'IS').
-courseNumRoom(343,'CS').
-courseNumRoom(350,'CS').
-courseNumRoom(353,'CS').
-courseNumRoom(358,'CS').
-courseNumRoom(361,'CS').
-courseNumRoom(365,'CS').
-courseNumRoom(371,'CS').
-courseNumRoom(375,'IS').
-courseNumRoom(437,'CS').
-courseNumRoom(443,'IS').
-courseNumRoom(450,'IS').
-courseNumRoom(451,'CS').
-courseNumRoom(452,'CS').
-courseNumRoom(457,'CS').
-courseNumRoom(460,'IS').
-courseNumRoom(463,'IS').
-courseNumRoom(467,'CS').
-courseNumRoom(661,'CIS').
-courseNumRoom(671,'CIS').
-courseNumRoom(691,'CIS').
+courseNumRoom(330,'MAK D1117').
+courseNumRoom(333,'MAK D1117').
+courseNumRoom(337,'MAK B1124').
+courseNumRoom(339,'MAK A1105').
+courseNumRoom(343,'MAK B1124').
+courseNumRoom(350,'MAK D1117').
+courseNumRoom(353,'MAK B1118').
+courseNumRoom(358,'MAK A1105').
+courseNumRoom(361,'MAK B1116').
+courseNumRoom(365,'MAK D1117').
+courseNumRoom(371,'MAK D1117').
+courseNumRoom(375,'EC 612').
+courseNumRoom(437,'MAK B1118').
+courseNumRoom(443,'MAK B1124').
+courseNumRoom(450,'MAK D1117').
+courseNumRoom(451,'MAK B1118').
+courseNumRoom(452,'MAK D1117').
+courseNumRoom(457,'MAK D1117').
+courseNumRoom(460,'MAK B1116').
+courseNumRoom(463,'MAK D2123').
+courseNumRoom(467,'MAK B1118').
+courseNumRoom(661,'EC 612').
+courseNumRoom(671,'EC 612').
+courseNumRoom(691,'EC 612').
 
 courseNumDays(330,'MWF').
 courseNumDays(333,'W').
