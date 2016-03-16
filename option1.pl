@@ -257,9 +257,11 @@ write(Query1), nl.
 
 
 /*Who is scheduled to teach what subject on TTH, 10am?*/
+whoWhatFromDayWhen(A,B):- findall((Y,Z),(courseNumDays(X,A),courseNumTime(X,B),courseNumName(X,Y),courseNumProf(X,Z)),Query1), write(Query1), nl.
 
 
 /*When do Dr. J. Leidig and Dr. El-Said teach at the same time?*/
+sameTimeTeach(A,B) :- findall(W,(courseNumProf(X,A),courseNumProf(Z,B),courseNumTime(X,W),courseNumTime(Z,W)),Query1),write(Query1),nl.
 
 
 /*Who teaches at the same time as Dr. J. Leidig?*/
