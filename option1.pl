@@ -247,7 +247,7 @@ whatDoTheyTeach(A):-  findall(Y,(courseNumProf(X,A),courseNumName(X,Y)), Query1)
 write(Query1), nl.
 
 /*write('Does Dr. J. Leidig teach Database?'), nl, doesAteachB('Dr. J. Leidig','Database').*/
-doesAteachB(A,B):- courseNumName(X,B),!,courseNumProf(X,A).
+doesAteachB(A,B):- courseNumName(X,B),courseNumProf(X,A).
 
 /*What is Dr. J. Leidig's schedule?*/
 
