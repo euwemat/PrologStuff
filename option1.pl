@@ -309,7 +309,15 @@ write(Query1), nl.
 
 /*Are there any scheduling conflicts of professors or locations?*/
 
-scheduleConflicts():- findall((A,B,R,T,D),X^Y^(courseNumDays(X,D),courseNumDays(Y,D),courseNumTime(X,T)courseNumTime(Y,T),courseNumProf(X,A),courseNumProf(Y,B)courseNumRoom(X,R),courseNumRoom(Y,R)),Query1),write(Query1),nl.
+scheduleConflicts(_) :- setof(((A,B),R,T,D),
+X^Y^
+(courseNumDays(X,D),courseNumDays(Y,D),
+courseNumTime(X,T),courseNumTime(Y,T),
+courseNumProf(X,A),courseNumProf(Y,B),
+courseNumRoom(X,R),courseNumRoom(Y,R),
+(A)\=(B)),
+Query1)
+,write(Query1),nl.
 
 
 
