@@ -272,13 +272,12 @@ whatDoTheyTeach(A):-  findall(Y,(courseNumProf(X,A),courseNumName(X,Y)), Query1)
 write(Query1), nl.
 
 /*write('Does Dr. J. Leidig teach Database?'), nl, doesAteachB('Dr. J. Leidig','Database').*/
-doesAteachB(A,B):- courseNumName(X,B),courseNumProf(X,A).
+doesAteachB(A,B):- courseNumName(X,B),!,courseNumProf(X,A).
+doTheyProfTeachClass(A, B):- doesAteachB(A,B),write('YES');not(doesAteachB(A,B)),write('NO').
 
 /*What is Dr. J. Leidig's schedule?*/
-
 schedule(A) :- findall((X, Y, Z, W),(courseNumProf(X,A),courseNumName(X,Y),courseNumTime(X,Z),courseNumDays(X,W)),Query1),
 write(Query1), nl.
-
 
 
 /*Who is scheduled to teach what subject on TTH, 10am?*/
@@ -286,30 +285,34 @@ whoWhatFromDayWhen(A,B):- findall((Y,Z),(courseNumDays(X,A),courseNumTime(X,B),c
 
 
 /*When do Dr. J. Leidig and Dr. El-Said teach at the same time?*/
-teachesSameTime(A,B) :- setof((W,U),X^Z^(courseNumProf(X,A),courseNumProf(Z,B),courseNumTime(X,W),courseNumTime(Z,W),
+tst(A,B) :- setof((W,U),X^Z^(courseNumProf(X,A),courseNumProf(Z,B),courseNumTime(X,W),courseNumTime(Z,W),
 courseNumDays(X,U),courseNumDays(Z,U)),Query1)
 ,write(Query1),nl.
+teachesSameTime(A,B) :- tst(A,B);not(tst(A,B)),write('They do not teach at the same time.').
 
 
 /*Who teaches at the same time as Dr. J. Leidig?*/
-teachesSameTime(A):- setof(D,X^Y^(courseNumProf(X,A),courseNumDays(X,B),courseNumTime(X,C),courseNumDays(Y,B),courseNumTime(Y,C),courseNumProf(Y,D)),Query1),
+whoTeachesSameTime(A):- setof(D,X^Y^(courseNumProf(X,A),courseNumDays(X,B),courseNumTime(X,C),courseNumDays(Y,B),courseNumTime(Y,C),courseNumProf(Y,D)),Query1),
 write(Query1), nl.
+
 
 /*What courses do Jim and Pam have in common?*/
 coursesInCommon(A,B):- findall(Y,(courseNumStud(X,A),courseNumStud(X,B),courseNumName(X,Y)), Query1),
 write(Query1), nl.
 
+
 /*Who is taking CS courses?*/
 whoIsIn(A):- setof(Z,X^(courseNumType(X,A),courseNumStud(X,Z)),Query1),write(Query1), nl. 
 
-/*What types of courses are Gaius Baltar taking?*/
 
+/*What types of courses are Gaius Baltar taking?*/
 whatTypesOfClassesDoTheyHave(A):- setof(Y,X^(courseNumStud(X,A),courseNumType(X,Y)),Query1),
 write(Query1), nl.
 
+
 /*Are there any scheduling conflicts of professors or locations?*/
 
-scheduleConflicts(_) :- setof(((A,B),R,T,D),
+scheduleConflicts :- setof(((A,B),R,T,D),
 X^Y^
 (courseNumDays(X,D),courseNumDays(Y,D),
 courseNumTime(X,T),courseNumTime(Y,T),
@@ -322,13 +325,14 @@ Query1)
 
 
 
-
-
-
 prints:-
-bagof(X, whatTypesOfClassesDoTheyHave('Gaius Baltar', X), Z),
-write(Z).
-
-
-
-
+write('What does Dr. J. Leidig teach?'), nl, whatDoTheyTeach('Dr. J. Leidig'), nl, nl,
+write('Does Dr. J. Leidig teach Database?'), nl, doTheyProfTeachClass('Dr. J. Leidig', 'Database'), nl, nl,
+write("What is Dr. J. Leidig's schedule?"), nl, schedule('Dr. J. Leidig'), nl, nl,
+write("Who is scheduled to teach what subject on TR, 10:00 am to 11:15 am?"),nl,whoWhatFromDayWhen('TR', '10:00 am 11:15 am'),nl,nl,
+write("When do Dr. J. Leidig and Dr. El-Said teach at the same time?"),nl,teachesSameTime('Dr. J. Leidig', 'Dr. El-Said'),nl,nl,
+write("Who teaches at the same time as Dr. J. Leidig?"),nl, whoTeachesSameTime('Dr. J. Leidig'),nl,nl,
+write("What courses do Jim and Pam have in common?"),nl, coursesInCommon('Jim', 'Pam'),nl,nl,
+write("Who is taking CS courses?"),nl,whoIsIn('CS'),nl,nl,
+write("What types of courses are Giaus Baltar taking?"),nl, whatTypesOfClassesDoTheyHave('Gaius Baltar'),nl,nl,
+write('Are there any scheduling conflicts of professors or locations?'),nl,nl,nl.
