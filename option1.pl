@@ -251,7 +251,7 @@ doesAteachB(A,B):- courseNumName(X,B),courseNumProf(X,A).
 
 /*What is Dr. J. Leidig's schedule?*/
 
-schedule(A) :- findall((X, Y, Z),(courseNumProf(X,A),courseNumName(X,Y),courseNumTime(X,Z)),Query1),
+schedule(A) :- findall((X, Y, Z, W),(courseNumProf(X,A),courseNumName(X,Y),courseNumTime(X,Z),courseNumDays(X,W)),Query1),
 write(Query1), nl.
 
 
