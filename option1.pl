@@ -217,12 +217,37 @@ courseNumType(661,'CIS').
 courseNumType(671,'CIS').
 courseNumType(691,'CIS').
 
+courseNumDays(330,'MWF').
+courseNumDays(333,'W').
+courseNumDays(337,'TR').
+courseNumDays(339,'TR').
+courseNumDays(343,'MWF').
+courseNumDays(350,'MWF').
+courseNumDays(353,'MWF').
+courseNumDays(358,'MWF').
+courseNumDays(361,'TR').
+courseNumDays(365,'TR').
+courseNumDays(371,'MW').
+courseNumDays(375,'R').
+courseNumDays(437,'MWF').
+courseNumDays(443,'MWF').
+courseNumDays(450,'MWF').
+courseNumDays(451,'MWF').
+courseNumDays(452,'MWF').
+courseNumDays(457,'MWF').
+courseNumDays(460,'TR').
+courseNumDays(463,'MWF').
+courseNumDays(467,'MWF').
+courseNumDays(661,'T').
+courseNumDays(671,'R').
+courseNumDays(691,'M').
+
 /*write('What does Dr. J. Leidig teach?'), nl, whatDoTheyTeach('Dr. J. Leidig')*/
 whatDoTheyTeach(A):-  findall(Y,(courseNumProf(X,A),courseNumName(X,Y)), Query1),
 write(Query1), nl.
 
 /*write('Does Dr. J. Leidig teach Database?'), nl, doesAteachB('Dr. J. Leidig','Database').*/
-doesAteachB(A,B):- courseNumProf(X,A),courseNumName(X,B).
+doesAteachB(A,B):- courseNumName(X,B),!,courseNumProf(X,A).
 
 /*What is Dr. J. Leidig's schedule?*/
 
