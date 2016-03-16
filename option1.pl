@@ -265,7 +265,7 @@ sameTimeTeach(A,B) :- setof(W,(courseNumProf(X,A),courseNumProf(Z,B),courseNumTi
 
 
 /*Who teaches at the same time as Dr. J. Leidig?*/
-teachesSameTime(A):- findall(D,(courseNumProf(X,A),courseNumDays(X,B),courseNumTime(X,C),courseNumDays(Y,B),courseNumTime(Y,C),courseNumProf(Y,D)),Query1),
+teachesSameTime(A):- setof(D,X^Y^(courseNumProf(X,A),courseNumDays(X,B),courseNumTime(X,C),courseNumDays(Y,B),courseNumTime(Y,C),courseNumProf(Y,D)),Query1),
 write(Query1), nl.
 
 /*What courses do Jim and Pam have in common?*/
