@@ -273,7 +273,7 @@ write(Query1), nl.
 
 /*write('Does Dr. J. Leidig teach Database?'), nl, doesAteachB('Dr. J. Leidig','Database').*/
 doesAteachB(A,B):- courseNumName(X,B),!,courseNumProf(X,A).
-doTheyProfTeachClass(A, B):- doesAteachB(A,B),write('YES');not(doesAteachB(A,B)),write('NO').
+doesProfTeachClass(A, B):- doesAteachB(A,B),write('YES');not(doesAteachB(A,B)),write('NO').
 
 /*What is Dr. J. Leidig's schedule?*/
 schedule(A) :- findall((X, Y, Z, W),(courseNumProf(X,A),courseNumName(X,Y),courseNumTime(X,Z),courseNumDays(X,W)),Query1),
@@ -327,12 +327,12 @@ Query1)
 
 prints:-
 write('What does Dr. J. Leidig teach?'), nl, whatDoTheyTeach('Dr. J. Leidig'), nl, nl,
-write('Does Dr. J. Leidig teach Database?'), nl, doTheyProfTeachClass('Dr. J. Leidig', 'Database'), nl, nl,
-write("What is Dr. J. Leidig's schedule?"), nl, schedule('Dr. J. Leidig'), nl, nl,
-write("Who is scheduled to teach what subject on TR, 10:00 am to 11:15 am?"),nl,whoWhatFromDayWhen('TR', '10:00 am 11:15 am'),nl,nl,
-write("When do Dr. J. Leidig and Dr. El-Said teach at the same time?"),nl,teachesSameTime('Dr. J. Leidig', 'Dr. El-Said'),nl,nl,
-write("Who teaches at the same time as Dr. J. Leidig?"),nl, whoTeachesSameTime('Dr. J. Leidig'),nl,nl,
-write("What courses do Jim and Pam have in common?"),nl, coursesInCommon('Jim', 'Pam'),nl,nl,
-write("Who is taking CS courses?"),nl,whoIsIn('CS'),nl,nl,
-write("What types of courses are Giaus Baltar taking?"),nl, whatTypesOfClassesDoTheyHave('Gaius Baltar'),nl,nl,
+write('Does Dr. J. Leidig teach Database?'), nl, doesProfTeachClass('Dr. J. Leidig', 'Database'), nl, nl,
+write('What is Dr. J. Leidig\'s schedule?'), nl, schedule('Dr. J. Leidig'), nl, nl,
+write('Who is scheduled to teach what subject on TR, 10:00 am to 11:15 am?'),nl,whoWhatFromDayWhen('TR', '10:00 am 11:15 am'),nl,nl,
+write('When do Dr. J. Leidig and Dr. El-Said teach at the same time?'),nl,teachesSameTime('Dr. J. Leidig', 'Dr. El-Said'),nl,nl,
+write('Who teaches at the same time as Dr. J. Leidig?'),nl, whoTeachesSameTime('Dr. J. Leidig'),nl,nl,
+write('What courses do Jim and Pam have in common?'),nl, coursesInCommon('Jim', 'Pam'),nl,nl,
+write('Who is taking CS courses?'),nl,whoIsIn('CS'),nl,nl,
+write('What types of courses are Giaus Baltar taking?'),nl, whatTypesOfClassesDoTheyHave('Gaius Baltar'),nl,nl,
 write('Are there any scheduling conflicts of professors or locations?'),nl,scheduleConflicts,nl,nl.
