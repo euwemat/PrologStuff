@@ -1,3 +1,13 @@
+/***********************************************************
+* This program could be used at the registrars office. Its 
+* a registry of class that tells you the course number, 
+* course professor, course students, course times, course 
+* days, course names, course rooms and course types.
+*
+*Authors: Taylor Euwema & Alex Stuart
+*
+***********************************************************/
+
 /*----- Facts -----*/
 
 /*---- Matches Course Number To Course Name ----*/
@@ -27,30 +37,30 @@ courseNumName(671,'Information Visualization').
 courseNumName(691,'MBI Capstone').
 
 /*---- Matches Course Number To Course Time ----*/
-courseNumTime(330,'9:00 am 9:50 am').
-courseNumTime(467,'10:00 am 10:50 am').
-courseNumTime(451,'10:00 am 10:50 am').
-courseNumTime(437,'10:00 am 10:50 am').
-courseNumTime(350,'10:00 am 10:50 am').
-courseNumTime(460,'10:00 am 11:15 am').
-courseNumTime(365,'10:00 am 11:15 am').
-courseNumTime(443,'11:00 am 11:50 am').
-courseNumTime(450,'12:00 pm 12:50 pm').
-courseNumTime(353,'12:00 pm 12:50 pm').
-courseNumTime(452,'1:00 pm 1:50 pm').
-courseNumTime(343,'1:00 pm 1:50 pm').
-courseNumTime(339,'1:00 pm 2:15 pm').
-courseNumTime(463,'2:00 pm 2:50 pm').
-courseNumTime(457,'2:00 pm 2:50 pm').
-courseNumTime(358,'3:00 pm 3:50 pm').
-courseNumTime(337,'3:00 pm 3:50 pm').
-courseNumTime(361,'4:00 pm 5:15 pm').
-courseNumTime(371,'4:00 pm 5:15 pm').
-courseNumTime(375,'6:00 pm 7:50 pm').
-courseNumTime(333,'6:00 pm 8:50 pm').
-courseNumTime(661,'6:00 pm 8:50 pm').
-courseNumTime(671,'6:00 pm 8:50 pm').
-courseNumTime(691,'6:00 pm 8:50 pm').
+courseNumTime(330,'9:00am - 9:50am').
+courseNumTime(467,'10:00am - 10:50am').
+courseNumTime(451,'10:00am - 10:50am').
+courseNumTime(437,'10:00am - 10:50am').
+courseNumTime(350,'10:00am - 10:50am').
+courseNumTime(460,'10:00am - 11:15am').
+courseNumTime(365,'10:00am - 11:15am').
+courseNumTime(443,'11:00am - 11:50am').
+courseNumTime(450,'12:00pm - 12:50pm').
+courseNumTime(353,'12:00pm - 12:50pm').
+courseNumTime(452,'1:00pm - 1:50pm').
+courseNumTime(343,'1:00pm - 1:50pm').
+courseNumTime(339,'1:00pm - 2:15pm').
+courseNumTime(463,'2:00pm - 2:50pm').
+courseNumTime(457,'2:00pm - 2:50pm').
+courseNumTime(358,'3:00pm - 3:50pm').
+courseNumTime(337,'3:00pm - 3:50pm').
+courseNumTime(361,'4:00pm - 5:15pm').
+courseNumTime(371,'4:00pm - 5:15pm').
+courseNumTime(375,'6:00pm - 7:50pm').
+courseNumTime(333,'6:00pm - 8:50pm').
+courseNumTime(661,'6:00pm - 8:50pm').
+courseNumTime(671,'6:00pm - 8:50pm').
+courseNumTime(691,'6:00pm - 8:50pm').
 
 /*---- Matches Course Number To Course Professor ----*/
 courseNumProf(330,'Dr. Du').
@@ -181,7 +191,7 @@ whatDoTheyTeach(A):-	findall(Y,(courseNumProf(X,A),courseNumName(X,Y)), Query1),
 /*This will tell you if a professor teaches a specific course
   Example doesProfTeachClass('Dr. J. Leidig', 'Database')*/
 doesAteachB(A,B):- courseNumName(X,B),!,courseNumProf(X,A).
-doesProfTeachClass(A, B):- doesAteachB(A,B),write('YES');not(doesAteachB(A,B)),write('No '),write(A),write(' does not teach '),write(B).
+doesProfTeachClass(A, B):- doesAteachB(A,B),write('YES');not(doesAteachB(A,B)),write('No '),write(A),write(' does not teach '),write(B), nl.
 
 /*This will tell you the schedule of a specific professor
   Example schedule('Dr. J. Leidig')*/
@@ -190,7 +200,7 @@ schedule(A):-	findall((X, Y, Z, W),(courseNumProf(X,A),courseNumName(X,Y),course
 
 
 /*This will tell you who is teaching a course at a specific day of the week and time
-  Example whoWhatFromDayWhen('TR', '10:00 am 11:15 am')*/
+  Example whoWhatFromDayWhen('TR', '10:00am - 11:15am')*/
 whoWhatFromDayWhen(A,B):- findall((Y,Z),(courseNumDays(X,A),courseNumTime(X,B),courseNumName(X,Y),courseNumProf(X,Z)),Query1), write(Query1), nl.
 
 
@@ -206,7 +216,7 @@ teachesSameTime(A,B) :- tst(A,B),write('Yes they teach at the same time');not(ts
 whoTeachesSameTime(A):-	setof(D,X^Y^(courseNumProf(X,A),courseNumDays(X,B),courseNumTime(X,C),courseNumDays(Y,B),courseNumTime(Y,C),courseNumProf(Y,D),D\=A),Query1),
 						write(Query1), nl.
 
-
+ 
 /*This will tell you what courses two specific students have in common
   Example coursesInCommon('Jim', 'Pam')*/
 coursesInCommon(A,B):-	findall(Y,(courseNumStud(X,A),courseNumStud(X,B),courseNumName(X,Y)), Query1),
@@ -226,7 +236,7 @@ whatTypesOfClassesDoTheyHave(A):- 	setof(Y,X^(courseNumStud(X,A),courseNumType(X
 
 /*Are there any scheduling conflicts of professors or locations?
   This will tell you if there is any scheduling conflicts between professors*/
-scheduleConflicts:-	setof(((A,B),R,T,D),
+scheduleConflicts:-	setof(((A),(B),R,T,D),
 					X^Y^
 					(courseNumDays(X,D),courseNumDays(Y,D),
 					courseNumTime(X,T),courseNumTime(Y,T),
@@ -236,13 +246,13 @@ scheduleConflicts:-	setof(((A,B),R,T,D),
 					write(Query1),nl.
 
 					
-/*----- Goal -----*/
+/*----- Goals -----*/
 prints:-
 write('What does Dr. J. Leidig teach?'), nl, whatDoTheyTeach('Dr. J. Leidig'), nl, nl,
 write('Does Dr. J. Leidig teach Database?'), nl, doesProfTeachClass('Dr. J. Leidig', 'Database'), nl, nl,
 write('What is Dr. J. Leidig\'s schedule?'), nl, schedule('Dr. J. Leidig'), nl, nl,
-write('Who is scheduled to teach what subject on TR, 10:00 am to 11:15 am?'),nl,whoWhatFromDayWhen('TR', '10:00 am 11:15 am'),nl,nl,
-write('When do Dr. J. Leidig and Dr. El-Said teach at the same time?'),nl,teachesSameTime('Dr. J. Leidig', 'Dr. El-Said'),nl,nl,
+write('Who is scheduled to teach what subject on TR, 10:00 am to 11:15 am?'),nl,whoWhatFromDayWhen('TR', '10:00am - 11:15am'),nl,nl,
+write('When does Dr. J. Leidig and Dr. El-Said teach at the same time?'),nl,teachesSameTime('Dr. J. Leidig', 'Dr. El-Said'),nl,nl,
 write('Who teaches at the same time as Dr. J. Leidig?'),nl, whoTeachesSameTime('Dr. J. Leidig'),nl,nl,
 write('What courses do Jim and Pam have in common?'),nl, coursesInCommon('Jim', 'Pam'),nl,nl,
 write('Who is taking CS courses?'),nl,whoIsIn('CS'),nl,nl,
